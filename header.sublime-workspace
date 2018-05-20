@@ -1,0 +1,502 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"par",
+				"parallaxElements"
+			],
+			[
+				"d",
+				"d:b\tdisplay:block"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "gulpfile.js",
+			"settings":
+			{
+				"buffer_size": 1641,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "dev/sass/siteheader.scss",
+			"settings":
+			{
+				"buffer_size": 2401,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 561,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "dev/js/navmenu.js",
+			"settings":
+			{
+				"buffer_size": 12273,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"list pack",
+				"Package Control: List Packages"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"sass",
+				"Set Syntax: Sass"
+			]
+		],
+		"width": 448.0
+	},
+	"console":
+	{
+		"height": 130.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Zack/Desktop/siteheader",
+		"/C/Users/Zack/Desktop/siteheader/dev",
+		"/C/Users/Zack/Desktop/siteheader/dev/js",
+		"/C/Users/Zack/Desktop/siteheader/dev/sass",
+		"/C/Users/Zack/Desktop/siteheader/dist"
+	],
+	"file_history":
+	[
+		"/C/Users/Zack/Desktop/siteheader/dev/index.html",
+		"/C/Users/Zack/Desktop/siteheader/dist/index.html",
+		"/C/Users/Zack/Desktop/siteheader/dev/sass/siteheader.scss",
+		"/C/Users/Zack/Desktop/siteheader/gulpfile.js",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/pages/_main.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/index.html",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/components/_hero.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/variables/_colors.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/testing/mountains.svg",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/js/parallaxScrolling.js",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dist/js/script.js",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/.babelrc",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/styles.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/layout/_reset.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/components/_footer.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/variables/_typography.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/js/script.js",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/package.json",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/components/_header.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dist/css/styles.css",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/docker-compose.yml",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/img/Artboard 1.svg",
+		"/C/Users/Zack/Documents/bag-of-holding/logo/assets/logo-white.svg",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/sass/layout/_grid.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/docker-compose.yml",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dist/index.html",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/html/test.php",
+		"/C/Users/Zack/Desktop/cartoon-robot-hi.png",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/site.conf",
+		"/C/Users/Zack/Documents/bag-of-holding/portfolio-site/dev/nginx.conf",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/style.css",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/variables-site/_colors.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/_site.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/header/_header.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/layout/_homepage.scss",
+		"/C/Users/Zack/Desktop/wordpress/wp-config-sample.php",
+		"/C/Users/Zack/AppData/Local/Temp/scp40338/foodorflight/wp-config.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/footer/_footer.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/primary/_posts-and-pages.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/homepage-template.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/forms/_buttons.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/js/dogsofsteel-gallery.js",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/variables-site/_structure.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/layout/_global.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/gallery/_gallery.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/alm/_masonry.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/functions.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/gallery.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/typography/_headings.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/template-parts/content-gallery.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/js/navigation.js",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/footer.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/inc/customizer.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/plugins/wpforms-lite/assets/css/wpforms-full.css",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/navigation/_links.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/contact/_contact.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/template-parts/content.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/header.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/template-parts/content-page.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/page.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/header/_header-menu.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/js/dogsofsteel-navbar.js",
+		"/C/Users/Zack/Desktop/fancybox-master/dist/jquery.fancybox.min.js",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/js/gallery-filter.js",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/style.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/rocket++/site/marketing-site/README.md",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/plugins/jquery-masonry-image-gallery/init.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/mixins/_mixins-master.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/_normalize.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/full-width-template.php",
+		"/C/Users/Zack/Documents/bag-of-holding/sail-threejs/index.html",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/inc/custom-header.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/media/_galleries.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/variables-site/_columns.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/variables-site/_variables-site.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/site/footer/_footer-menu.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/single.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/dog-gallery-template.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/inc/template-tags.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/navigation/_menus.scss",
+		"/C/Users/Zack/AppData/Local/Temp/Temp1_Ex_Files_WP_Themes_From_Scratch.zip/05_02/humescores/sass/site/header/_header.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/modules/_clearings.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/gulpfile.js",
+		"/C/Users/Zack/Desktop/Gulpfile.js",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/typography/_typography.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/variables-site/_typography.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/layout/_content-sidebar.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/maps/style.css.map",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/twentyseventeen/functions.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/layouts/_global.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/sass/typography/_copy.scss",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/package.json",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/docker-compose.yml",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/testing/wp-content/themes/twentyseventeen/template-parts/header/site-branding.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/dogsofsteel/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/twentyseventeen/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/wp-content/themes/twentyseventeen/template-parts/header/site-branding.php",
+		"/C/Users/Zack/Documents/bag-of-holding/dogsofsteel/wordpress/test.html",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/wp-content/themes/test-theme/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/wp-config.php",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/wp-content/themes/dogsofsteel/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/index.php",
+		"/C/Users/Zack/Documents/bag-of-holding/wordpress-docker-test/xcgghchxhg"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 109.0,
+		"where_history":
+		[
+			"C:\\Users\\Zack\\Documents\\bag-of-holding\\portfolio-site\\node_modules\\bootstrap",
+			"C:\\Users\\Zack\\Documents\\bag-of-holding\\dogsofsteel\\wordpress\\wp-content\\plugins",
+			"C:\\Users\\Zack\\Documents\\bag-of-holding\\dogsofsteel"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"$opers-blu-gray",
+			"<div class=\"project__title\">",
+			"<div class=\"project__button\">",
+			"\n@",
+			"$color",
+			"$enable-grid-classes",
+			"enable_grid",
+			"enable-_grid",
+			"'../../../",
+			"cssDir",
+			"root",
+			"almFilter",
+			"hero",
+			"jquery",
+			"style",
+			"repeater",
+			"image",
+			"media",
+			"header",
+			".social-media-menu ",
+			".footer-menu",
+			"children",
+			"twentyseventeen",
+			"bloginfo",
+			"twentyseventeen",
+			"config"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"#social-media-menu",
+			".social-media-menu",
+			"dogsofsteel"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "gulpfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1641,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								677,
+								677
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Theme - Afterglow/Prefs/Langs/Gulpfile JS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "dev/sass/siteheader.scss",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2401,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Sass/Syntaxes/SCSS.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 630.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "package.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 561,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Theme - Afterglow/Prefs/Langs/npm JSON.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "dev/js/navmenu.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12273,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								141,
+								141
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "header.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 278.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
