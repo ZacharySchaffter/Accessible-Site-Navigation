@@ -6,9 +6,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 
-var browserify = require('browserify');
-var source = require("vinyl-source-stream")
-
 var dev = './dev/';
 var devCss = dev + 'sass/';
 var devJs = dev + 'js/';
@@ -41,19 +38,13 @@ gulp.task('css', function() {
 });
 
 //JS job
-
 gulp.task('js', function() {
-    return browserify({
-        entries : devJs+'navmenu.js'
-    }) //only look at app entry
-        .bundle()
-        .pipe(source("navmenu.js"))
+    return gulp.src(devJs+'navmenu.js')
+        .pipe(uglify())
         .pipe(gulp.dest(prodJs));
 });
 
-
-
-
+//Watch job
 gulp.task('watch', function() {
     browserSync.init({
         proxy: "http://localhost:5000/",

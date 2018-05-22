@@ -47,7 +47,6 @@ var MenuBar = function(elementId){
 
 MenuBar.prototype.init = function(){    
     this.domNode.setAttribute('role', 'menubar');
-
     var elem = this.domNode.firstElementChild;//grab the first child of the menubar
     //loop through direct children
     while (elem) {
@@ -56,7 +55,6 @@ MenuBar.prototype.init = function(){
             menuItem.init();
             this.menuitems.push(menuItem);//push menu item to parent menu's array
         }
-
      elem = elem.nextElementSibling;
     }
 };
@@ -164,24 +162,21 @@ MenuItem.prototype.init = function () {
 };
 MenuItem.prototype.handleTouch = function (event) {
     console.log("Touch detected");
-    
+    event.stopPropagation();
     if (!hasClass(event.target, 'active') && this.subMenu){ //if the menu item has a subnav, but not the active class, prevent normal behavior.
         console.log("El wasnt active and has submenu");
-        event.stopPropagation();
         event.preventDefault();
         addClass(this.domNode, 'active');//add active class
 
         var obj = this;
         this.menu.menuitems.forEach(function(el){//for each sibling menuitem
             if (obj !== el && el.subMenu) { //if the particular item isnt the 
-              console.log("Closing: ", el.subMenu);
               el.subMenu.close();
             }
         });
         this.subMenu.open(true);
         
     } else {
-        console.log("Else clause fired");
     }
 
     console.log("------------");
@@ -195,8 +190,7 @@ MenuItem.prototype.handleKeydown = function (event) {
   switch (event.keyCode) {
     
     case this.keyCode.SPACE:
-    case this.keyCode.RETURN:
-      if (this.subMenu) {
+      if (!hasClass(this.domNode, "active") && this.subMenu) {
         this.subMenu.open();//open subnav
         this.subMenu.setFocusToFirstItem();//set focus to first item
         flag = true;
@@ -218,7 +212,7 @@ MenuItem.prototype.handleKeydown = function (event) {
     case this.keyCode.LEFT:
         if(this.menu.isMenuBar) {
             this.menu.setFocusToPrev(this);
-            this.subNav.close();
+            this.subMenu.close();
         } else if (!this.menu.parentMenuItem.menu.isMenuBar){
             this.menu.setFocusToParent();
             this.menu.close();
@@ -229,7 +223,7 @@ MenuItem.prototype.handleKeydown = function (event) {
     case this.keyCode.RIGHT:
         if(this.menu.isMenuBar) {
             this.menu.setFocusToNext(this);
-            this.subNav.close();
+            this.subMenu.close();
         } else if (this.subMenu){
             this.subMenu.open();
             this.subMenu.setFocusToFirstItem();
@@ -238,9 +232,6 @@ MenuItem.prototype.handleKeydown = function (event) {
         break;
 
     case this.keyCode.UP:
-        console.log("Pressed up");
-        console.log(this.menu.menuitems.indexOf(this));
-        console.log(this.menu.parentMenuItem.menu.isMenuBar);
         if (this.menu.menuitems && this.menu.menuitems.indexOf(this) === 0 && this.menu.parentMenuItem.menu.isMenuBar) {
             //check to see if you're on the first item, and the parent menu is the root
             this.menu.close();//close this subnav
@@ -280,7 +271,7 @@ MenuItem.prototype.setExpanded = function (value) {
 
 //Set hasFocus to true
 MenuItem.prototype.handleFocus = function (event) {
-  console.log("Focus assigned");
+    
 };
 
 //set hasFocus to false
@@ -290,7 +281,17 @@ MenuItem.prototype.handleBlur = function (event) {
 
 MenuItem.prototype.handleMouseover = function (event) {
     addClass(this.domNode, 'active');
+    
+    var parent = this.menu.parentMenuItem;
+    
+    //set active class on all parent menu items
+    while (parent) {
+        addClass(parent.domNode, "active");
+        parent = parent.menu ? parent.menu.parentMenuItem : false;
+    }
+    
     var thisMenuItem = this;
+    
     this.menu.menuitems.forEach(function(el){
         if (thisMenuItem != el && el.subMenu) {
             el.subMenu.close(true);
@@ -304,10 +305,6 @@ MenuItem.prototype.handleMouseover = function (event) {
 
 MenuItem.prototype.handleMouseout = function (event) {
     removeClass(this.domNode, 'active');
-    if (this.subMenu){
-        setTimeout(this.subMenu.close.bind(this.subMenu, false), 200);
-    }
-  
 };
 
 
@@ -374,14 +371,14 @@ SubMenu.prototype.close = function (closeChildMenus) {
     this.parentMenuItem.setExpanded(false);
     this.isVisible = false;
 
-    if(closeChildMenus){
-        this.menuitems.forEach(function(el){
+    /*if(closeChildMenus){
+        this.menuitems.forEach(function(el){//for each of the submenu's menuitems
             removeClass(el.domNode, 'active');//remove the active class for each menuitem
             if (el.subMenu){ //
                 el.subMenu.close(true);
             }
         });
-    }
+    }*/
 };
 
 
