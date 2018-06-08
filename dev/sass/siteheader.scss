@@ -37,11 +37,11 @@ body {
     li.nav-item, li {
         position:relative;
         
-        &:hover,
-        &.active {
+        a:hover,
+        a.active {
             background-color:$lt-gray;         
             
-            &>ul.sub-nav {
+            &+ul.sub-nav {
                 display:block;
             }
         }
@@ -52,27 +52,30 @@ body {
         position:relative;
         display:flex;
         align-items:center;
-        display:block;
-        padding:3em 1.5em;
-        cursor:pointer;
-        transition:background-color 150ms ease;
         border-left:1px solid transparent;
         border-right:1px solid transparent;
         
-        a{color:$blue;font-size:16px;}
-        
-        &:after {
-            content:"\f078"; //chevron down
-            font-family:FontAwesome;
-            left:100%;
+        &>a{
+            text-decoration:none;
             color:$blue;
-            top:0;
-            height:1em;
-            width:1em;
+            display:block;
+            font-size:16px;
+            padding:3em 1.5em;
+            transition:background-color 150ms ease;
+
+            &:after {
+                content:"\f078"; //chevron down
+                font-family:FontAwesome;
+                left:100%;
+                color:$blue;
+                top:0;
+                height:1em;
+                width:1em;
+            }
         }
-        
-        &:hover,
-        &.active {
+                
+        a:hover,
+        a.active {
             border-left:1px solid $md-gray;
             border-right:1px solid $md-gray;
             
@@ -103,29 +106,17 @@ body {
             transition:200ms all ease;
         }
 
-        li {
-            
-            border-bottom:1px solid $md-gray;
-
-            &:hover {
-                &>ul.sub-nav {
-                    display:block;  
-                    opacity:1;
-                    transform:translateX(0);
-                }
-            }
-
-                &:last-child {
-                    border-bottom:none;
-                }
-        }
-            
         a {
             display:block;
             padding:.5em 1.5em .5em .5em;
             position:relative;
             z-index:2;
             background-color:#FFF;
+            border-bottom:1px solid $md-gray;
+            
+            &:last-child {
+                border-bottom:none;
+            }
 
             &:hover,
             &:focus {
@@ -136,13 +127,14 @@ body {
             &.active {
                 background-color:darken($lt-gray, 3%); 
             }
-            
-            
-            
-            &.active+ul.sub-nav {
-                display:block;  
-                opacity:1;
-                transform:translateY(0);
+
+            &.active,
+            &:hover {
+                &+ul.sub-nav {
+                    display:block;  
+                    opacity:1;
+                    transform:translateX(0);
+                }
             }
             
             &.has-children {

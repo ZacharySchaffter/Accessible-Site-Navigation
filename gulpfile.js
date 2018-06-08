@@ -47,8 +47,9 @@ gulp.task('js', function() {
 //Watch job
 gulp.task('watch', function() {
     browserSync.init({
-        proxy: "http://localhost:5000/",
-        port: 1919
+        server: {
+            baseDir: "./dist/"
+        }
     });
     gulp.watch([dev + '**/*.css', dev + '**/*.scss' ], ['css']);
     gulp.watch([dev + '**/*.js'], ['js']);

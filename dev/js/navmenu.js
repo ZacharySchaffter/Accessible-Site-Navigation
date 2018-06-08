@@ -36,7 +36,6 @@ function hasClass(el, clsName) {
 
 ///////////////////////////////////////////////
 
-
 ////////////MenuBar
 
 var MenuBar = function(elementId){
@@ -47,16 +46,33 @@ var MenuBar = function(elementId){
 
 MenuBar.prototype.init = function(){    
     this.domNode.setAttribute('role', 'menubar');
+
     var elem = this.domNode.firstElementChild;//grab the first child of the menubar
     //loop through direct children
     while (elem) {
-        if (elem) {
-            var menuItem = new MenuItem(elem, this); //pass the constructor this listitem and this menu
+        if (elem.firstElementChild && elem.firstElementChild.nodeName.toLowerCase() === 'a') {
+            var menuItem = new MenuItem(elem.firstElementChild, this); //pass the constructor this listitem and this menu
             menuItem.init();
             this.menuitems.push(menuItem);//push menu item to parent menu's array
         }
+
      elem = elem.nextElementSibling;
     }
+    
+    var menuObj = this;
+    //add event handler to close menu when touch or clickstart clicks on something without the nav as an ancestor
+    document.addEventListener("mousedown", function(e){
+        if (!menuObj.domNode.contains(e.target)) {
+            //if target of a click or touch event isnt a child of the nav, close everything.
+            menuObj.closeAll();
+        }
+    });
+};
+
+MenuBar.prototype.closeAll = function(){
+    this.menuitems.forEach(function(el){
+        el.subMenu.close('true');
+    });
 };
 
 MenuBar.prototype.setFocusToNext = function (currentItem) {
@@ -99,13 +115,15 @@ MenuBar.prototype.setFocusToItem = function (newItem) {
     }
 };
 
+
 ///////////MenuItem 
 ///////////Assign it the domElement and a menu object for whichever menu it's a part of
-var MenuItem = function(domNode, menuObj) {
+var MenuItem = function(domNode, menuObj, isMobileMenuItem) {
 
     this.menu = menuObj; //menu that the element is a child of
     this.domNode = domNode;
     this.subMenu = false; //either false, of the object holding this menu item's submenu.  Inititally set to false
+    this.isMobileMenuItem = isMobileMenuItem;
 
     this.keyCode = Object.freeze({
         'TAB': 9,
@@ -127,71 +145,63 @@ MenuItem.prototype.init = function () {
     this.domNode.setAttribute('role', 'menuitem');
 
     this.domNode.addEventListener('keydown', this.handleKeydown.bind(this));
-    this.domNode.addEventListener('touchstart', this.handleTouch.bind(this));
-    this.domNode.addEventListener('focus', this.handleFocus.bind(this));
-    this.domNode.addEventListener('blur', this.handleBlur.bind(this));
-    this.domNode.addEventListener('mouseover', this.handleMouseover.bind(this));
-    this.domNode.addEventListener('mouseout', this.handleMouseout.bind(this));
-
-    var nextElement; 
-    if (this.menu.isMenuBar) {
-        //element is a top level nav item
-        nextElement = this.domNode.firstElementChild; //get the first element (the ul in each li.nav-item)
-
-        if (nextElement && nextElement.tagName === 'UL') {
-            this.domNode.setAttribute('aria-haspopup', 'true'); //set aria-haspopup
-            addClass(this.domNode, 'has-children');
-
-            this.subMenu = new SubMenu(nextElement, this);
-            this.subMenu.init();
-        }
-
-    } else {
-        //element isn't top level nav, so it'll be the sibling element
-        nextElement = this.domNode.nextElementSibling;
-
-        if (nextElement && nextElement.tagName === 'UL') {
-            this.domNode.setAttribute('aria-haspopup', 'true'); //set aria-haspopup
-            addClass(this.domNode, 'has-children');
-
-            this.subMenu = new SubMenu(nextElement, this);
-            this.subMenu.init();
-        }
-
+    
+    this.domNode.addEventListener('click', this.handleClick.bind(this));
+    
+    //Dont include hover events on the mobile menu items
+    if (!this.isMobileMenuItem) { 
+        this.domNode.addEventListener('touchstart', this.handleTouch.bind(this));
+        this.domNode.addEventListener('mouseover', this.handleMouseover.bind(this));
+        this.domNode.addEventListener('mouseout', this.handleMouseout.bind(this));
     }
+        
+
+    var nextElement = this.domNode.nextElementSibling;
+
+    if (nextElement && nextElement.tagName === 'UL') {
+        this.domNode.setAttribute('aria-haspopup', 'true'); //set aria-haspopup
+        this.domNode.setAttribute('aria-expanded', 'false'); //set aria-expanded
+        addClass(this.domNode, 'has-children');
+
+        this.subMenu = new SubMenu(nextElement, this);
+        this.subMenu.init();
+    }
+
+    
 };
-MenuItem.prototype.handleTouch = function (event) {
-    console.log("Touch detected");
+
+//Touches/Click event handler
+MenuItem.prototype.handleClick = function (event) {
+    console.log("Click Event");
     event.stopPropagation();
     if (!hasClass(event.target, 'active') && this.subMenu){ //if the menu item has a subnav, but not the active class, prevent normal behavior.
-        console.log("El wasnt active and has submenu");
-        event.preventDefault();
-        addClass(this.domNode, 'active');//add active class
-
-        var obj = this;
-        this.menu.menuitems.forEach(function(el){//for each sibling menuitem
-            if (obj !== el && el.subMenu) { //if the particular item isnt the 
-              el.subMenu.close();
-            }
-        });
-        this.subMenu.open(true);
+        event.preventDefault();        
+        this.subMenu.open(true); //open menu and close sibling
         
-    } else {
-    }
-
-    console.log("------------");
+    } else if (hasClass(event.target, 'active') && (event.target.getAttribute("href") ==="#" || !event.target.getAttribute("href"))) { 
+        //if the element is active, and the href attribute either doesnt exist or is a hashtag, close the submenu
+        event.preventDefault();        
+        this.subMenu.close(true);
+    } 
+    
 };
+
+MenuItem.prototype.handleTouch = function (event) {
+    console.log("Touched");
+    this.isTouched = true;
+}
+
 MenuItem.prototype.handleKeydown = function (event) {
   var tgt = event.currentTarget,
-    char = event.key,
     flag = false,
     clickEvent;
 
   switch (event.keyCode) {
     
     case this.keyCode.SPACE:
+    case this.keyCode.RETURN:
       if (!hasClass(this.domNode, "active") && this.subMenu) {
-        this.subMenu.open();//open subnav
+        this.subMenu.open(close);//open subnav
         this.subMenu.setFocusToFirstItem();//set focus to first item
         flag = true;
       }
@@ -199,18 +209,22 @@ MenuItem.prototype.handleKeydown = function (event) {
 
 
     case this.keyCode.DOWN:
-        if (this.menu.isMenuBar) { //is a menu item, show subnav
-            this.subMenu.open();//open subnav
+        if (this.menu.isMenuBar && !this.isMobileMenuItem) { //is a menu item, show subnav
+            this.subMenu.open(true);//open subnav
             this.subMenu.setFocusToFirstItem();//set focus to first item
             flag = true;
         } else {
             this.menu.setFocusToNext(this);
             flag = true;
         }
+          
+        if (!this.menu.isMenuBar && this.subMenu) {
+            this.subMenu.close();
+        }
         break;
-
+          
     case this.keyCode.LEFT:
-        if(this.menu.isMenuBar) {
+        if(this.menu.isMenuBar && !this.isMobileMenuItem) {
             this.menu.setFocusToPrev(this);
             this.subMenu.close();
         } else if (!this.menu.parentMenuItem.menu.isMenuBar){
@@ -221,11 +235,11 @@ MenuItem.prototype.handleKeydown = function (event) {
         break;
 
     case this.keyCode.RIGHT:
-        if(this.menu.isMenuBar) {
+        if(this.menu.isMenuBar && !this.isMobileMenuItem) {
             this.menu.setFocusToNext(this);
             this.subMenu.close();
         } else if (this.subMenu){
-            this.subMenu.open();
+            this.subMenu.open(true);
             this.subMenu.setFocusToFirstItem();
         }
         flag = true;
@@ -239,6 +253,10 @@ MenuItem.prototype.handleKeydown = function (event) {
         } else {
             //grab previous item
             this.menu.setFocusToPrev(this);
+        }
+          
+        if (!this.menu.isMenuBar && this.subMenu) {
+            this.subMenu.close();
         }
         flag=true;
         break;
@@ -254,9 +272,7 @@ MenuItem.prototype.handleKeydown = function (event) {
       flag = true;
       break;
 
-    case this.keyCode.TAB:
-      this.subMenu.close();
-      break;
+    
   }
 
   if (flag) {
@@ -269,17 +285,15 @@ MenuItem.prototype.setExpanded = function (value) {
   this.domNode.setAttribute('aria-expanded', value);
 };
 
-//Set hasFocus to true
-MenuItem.prototype.handleFocus = function (event) {
-    
-};
-
-//set hasFocus to false
-MenuItem.prototype.handleBlur = function (event) {
-
-};
 
 MenuItem.prototype.handleMouseover = function (event) {
+    console.log("Mouse Over Event.");
+    if (this.isTouched){
+        console.log("Preventing Mouseover");
+        this.isTouched = false; //mouseover event untoggles this.  This prevents touch enabled devices from double-firing from touch/mouseover
+        return; 
+    }
+        
     addClass(this.domNode, 'active');
     
     var parent = this.menu.parentMenuItem;
@@ -297,17 +311,59 @@ MenuItem.prototype.handleMouseover = function (event) {
             el.subMenu.close(true);
         }
     });
+    
     if (this.subMenu){
         this.subMenu.open();
-    }
- 
+    } 
 };
 
 MenuItem.prototype.handleMouseout = function (event) {
     removeClass(this.domNode, 'active');
 };
 
+//method to check menuitem against current link, and add styles to it and the parent if true.  Loops through all child elements too.
+MenuItem.prototype.checkIfCurrentLink = function(currentUrl){
+    var thisHref = this.domNode.getAttribute('href');
+    //Add 'index.shtml' to ends of links that end in '/'
+    if (thisHref.slice(-1) === "/"){
+        thisHref += "index.shtml";
+    } 
+    
+    if (currentUrl !== thisHref && !this.subMenu) {
+        return false;
+        
+    } else if (currentUrl !== thisHref && this.subMenu){
+        var foundCurrentMenuItem = false;
+        for (var i = 0; i<this.subMenu.menuitems.length; i++){
+            var thisMenuItem = this.subMenu.menuitems[i];
+            foundCurrentMenuItem = thisMenuItem.checkIfCurrentLink(currentUrl);
+            
+            if (foundCurrentMenuItem){
+                break;
+            }
+        }
+        return foundCurrentMenuItem;
+        
+    } else if (currentUrl.indexOf(thisHref) >= 0){
+        addClass(this.domNode, "current-menu-item"); //add current menu item class
+        
 
+        if (this.isMobileMenuItem){
+            addClass(this.domNode, "active"); //add current menu item class
+            var parentMenuItem = this.menu.parentMenuItem ? this.menu.parentMenuItem : false;
+            //Loop through parent listitems and add active class
+            while (parentMenuItem){
+                this.menu.open();
+                console.log(this.menu);
+                addClass(parentMenuItem.domNode, 'active');
+
+                parentMenuItem = parentMenuItem.menu.parentMenuItem ? parentMenuItem.menu.parentMenuItem : false;
+            }
+        }
+        
+        return true;
+    }
+}
 
 /////////Submenu
 
@@ -318,7 +374,7 @@ var SubMenu = function (domNode, parentEl) {
   this.domNode = domNode;
   this.parentMenuItem = parentEl;
   this.isVisible = false;
-
+    
   this.menuitems = []; // See PopupMenu init method
 };
 
@@ -331,21 +387,23 @@ SubMenu.prototype.init = function () {
   // Configure the domNode itself
   this.domNode.setAttribute('role', 'menu');
 
-  this.domNode.addEventListener('mouseover', this.handleMouseover.bind(this));
-  this.domNode.addEventListener('mouseout', this.handleMouseout.bind(this));
+    if (!this.parentMenuItem.isMobileMenuItem) {
+        this.domNode.addEventListener('mouseover', this.handleMouseover.bind(this));
+        this.domNode.addEventListener('mouseout', this.handleMouseout.bind(this));
+    }
 
   childElement = this.domNode.firstElementChild; //get the first li in the ul
 
-  while (childElement) {
-    menuElement = childElement.firstElementChild; //get the first anchor in the li
+    while (childElement) {
+        menuElement = childElement.firstElementChild; //get the first anchor in the li
 
-    if (menuElement && menuElement.tagName.toLowerCase() == 'a') {
-      var menuItem = new MenuItem(menuElement, this);
-      menuItem.init();
-      this.menuitems.push(menuItem);
+        if (menuElement && menuElement.tagName.toLowerCase() == 'a') {
+            var menuItem = new MenuItem(menuElement, this, this.parentMenuItem.isMobileMenuItem);
+            menuItem.init();
+            this.menuitems.push(menuItem);
+        }
+        childElement = childElement.nextElementSibling; //get next li and repeat
     }
-    childElement = childElement.nextElementSibling; //get next li and repeat
-  }
 
 };
 
@@ -359,10 +417,21 @@ SubMenu.prototype.handleMouseout = function (event) {
 };
 
 //Menu Display Methods
-SubMenu.prototype.open = function (closeSiblings) {
-  addClass(this.parentMenuItem.domNode, 'active');   
+SubMenu.prototype.open = function (closeSiblingMenus) {
+  if (!hasClass(this.parentMenuItem.domNode, 'active')){
+      addClass(this.parentMenuItem.domNode, 'active');
+  }
   this.parentMenuItem.setExpanded(true);
   this.isVisible = true;
+    
+    if (closeSiblingMenus){
+        var thisMenuItem = this.parentMenuItem;
+        this.parentMenuItem.menu.menuitems.forEach(function(el){
+            if (thisMenuItem != el && el.subMenu) {
+                el.subMenu.close(true);
+            }
+        });
+    }
      
 };
 
@@ -370,15 +439,15 @@ SubMenu.prototype.close = function (closeChildMenus) {
     removeClass(this.parentMenuItem.domNode, 'active');
     this.parentMenuItem.setExpanded(false);
     this.isVisible = false;
-
-    /*if(closeChildMenus){
+    
+    if(closeChildMenus){
         this.menuitems.forEach(function(el){//for each of the submenu's menuitems
             removeClass(el.domNode, 'active');//remove the active class for each menuitem
             if (el.subMenu){ //
                 el.subMenu.close(true);
             }
         });
-    }*/
+    }
 };
 
 
@@ -430,6 +499,7 @@ SubMenu.prototype.setFocusToPrev = function (currentItem) {
   this.setFocusToItem(newItem);
 
 };
+
 
 
 ////////////////////////////////////////
