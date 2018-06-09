@@ -115,7 +115,6 @@ MenuBar.prototype.setFocusToItem = function (newItem) {
     }
 };
 
-
 ///////////MenuItem 
 ///////////Assign it the domElement and a menu object for whichever menu it's a part of
 var MenuItem = function(domNode, menuObj, isMobileMenuItem) {
@@ -266,7 +265,29 @@ MenuItem.prototype.handleKeydown = function (event) {
         this.menu.parentMenuItem.domNode.focus();
         flag = true;
         break;
+          
+          
+    case event.shiftKey && this.keyCode.TAB:
+        if (this.menu.menuitems && this.menu.menuitems.indexOf(this) === 0 && this.menu.parentMenuItem) {
+            this.menu.close();//close this subnav
+            this.menu.parentMenuItem.domNode.focus();
+            flag=true;
+        } else if (!this.menu.isMenuBar) {
+            this.menu.setFocusToPrev(this)
+            flag=true;
+        }
 
+          break; 
+          
+    case this.keyCode.TAB:
+          console.log(this);
+          if (!this.menu.isMenuBar) {
+            this.menu.setFocusToNext(this);
+            flag=true;
+          }
+          
+          break;
+          
     case this.keyCode.END:
     case this.keyCode.PAGEDOWN:
       flag = true;
@@ -287,37 +308,45 @@ MenuItem.prototype.setExpanded = function (value) {
 
 
 MenuItem.prototype.handleMouseover = function (event) {
-    console.log("Mouse Over Event.");
+    this.hasHover = true;
     if (this.isTouched){
-        console.log("Preventing Mouseover");
         this.isTouched = false; //mouseover event untoggles this.  This prevents touch enabled devices from double-firing from touch/mouseover
         return; 
     }
-        
-    addClass(this.domNode, 'active');
     
-    var parent = this.menu.parentMenuItem;
     
-    //set active class on all parent menu items
-    while (parent) {
-        addClass(parent.domNode, "active");
-        parent = parent.menu ? parent.menu.parentMenuItem : false;
-    }
+    var menuItem = this;
     
-    var thisMenuItem = this;
+    setTimeout(function(){
+        if (menuItem.hasHover) {
+            var parent = menuItem.menu.parentMenuItem;
     
-    this.menu.menuitems.forEach(function(el){
-        if (thisMenuItem != el && el.subMenu) {
-            el.subMenu.close(true);
+            //set active class on all parent menu items
+            while (parent) {
+                addClass(parent.domNode, "active");
+                parent = parent.menu ? parent.menu.parentMenuItem : false;
+            }
+
+            var thisMenuItem = menuItem;
+            menuItem.menu.menuitems.forEach(function(el){
+                if (thisMenuItem != el && el.subMenu) {
+                    el.subMenu.close(true);
+                }
+            });
+
+            addClass(menuItem.domNode, 'active');
+            //open submenu 
+            if (menuItem.subMenu){
+                menuItem.subMenu.open();
+            } 
         }
-    });
+    }, 15);
     
-    if (this.subMenu){
-        this.subMenu.open();
-    } 
+    
 };
 
 MenuItem.prototype.handleMouseout = function (event) {
+    this.hasHover = false;
     removeClass(this.domNode, 'active');
 };
 
@@ -409,20 +438,30 @@ SubMenu.prototype.init = function () {
 
 /* EVENT HANDLERS */
 SubMenu.prototype.handleMouseover = function (event) {
-  this.open();
+    this.hasHover = true;
+    this.open();
 };
 
 SubMenu.prototype.handleMouseout = function (event) {
-  this.close(true);
+    this.hasHover = false;
+    //this.close(true);
+    var obj = this;
+    var parent = this.parentMenuItem;
+    setTimeout(function(){
+        if (!obj.hasHover && !parent.hasHover) {
+            obj.close(true);
+        }
+    }, 200);
+    
 };
 
 //Menu Display Methods
 SubMenu.prototype.open = function (closeSiblingMenus) {
-  if (!hasClass(this.parentMenuItem.domNode, 'active')){
-      addClass(this.parentMenuItem.domNode, 'active');
-  }
-  this.parentMenuItem.setExpanded(true);
-  this.isVisible = true;
+    //Add class to parentmenu item if 
+    addClass(this.parentMenuItem.domNode, 'active');
+    
+    this.parentMenuItem.setExpanded(true);
+    this.isVisible = true;
     
     if (closeSiblingMenus){
         var thisMenuItem = this.parentMenuItem;
@@ -440,7 +479,7 @@ SubMenu.prototype.close = function (closeChildMenus) {
     this.parentMenuItem.setExpanded(false);
     this.isVisible = false;
     
-    if(closeChildMenus){
+    if(closeChildMenus) {
         this.menuitems.forEach(function(el){//for each of the submenu's menuitems
             removeClass(el.domNode, 'active');//remove the active class for each menuitem
             if (el.subMenu){ //
@@ -499,10 +538,6 @@ SubMenu.prototype.setFocusToPrev = function (currentItem) {
   this.setFocusToItem(newItem);
 
 };
-
-
-
-////////////////////////////////////////
 
 
 var menu = new MenuBar('main-navigation');

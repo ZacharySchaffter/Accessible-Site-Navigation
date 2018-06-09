@@ -1,5 +1,5 @@
-$lt-gray : #ccc;
-$md-gray : #333;
+$lt-gray : #ececec;
+$md-gray : #ccc;
 $blue : blue;
 
 body {
@@ -22,122 +22,146 @@ body {
     align-items:center;
 }
 
-#main-navigation {
+
+nav {
     position:relative;
-    display:flex;
     z-index:1000; 
     font-size:16px;
     
-    &>ul {
+    
+    ul#main-navigation {
         width:100%;
         height:100%;
         display:flex;
     }
-    
-    li.nav-item, li {
-        position:relative;
         
-        a:hover,
-        a.active {
-            background-color:$lt-gray;         
-            
-            &+ul.sub-nav {
-                display:block;
-            }
-        }
-    }
-    
-    li.nav-item { //nav-items are the LI's without links
+    li.nav-item { 
         height:100%;
         position:relative;
-        display:flex;
-        align-items:center;
-        border-left:1px solid transparent;
-        border-right:1px solid transparent;
         
-        &>a{
-            text-decoration:none;
-            color:$blue;
+        align-items:center;
+        cursor:pointer;
+        transition:background-color 150ms ease;
+        
+        
+        &>a {
+            display:flex;
             display:block;
-            font-size:16px;
             padding:3em 1.5em;
-            transition:background-color 150ms ease;
-
+            color:#000;
+            font-size:16px;
+            position:relative;
+            border-left:1px solid transparent;
+            border-right:1px solid transparent;
+            text-decoration:none;
+            z-index:2;
+            
             &:after {
                 content:"\f078"; //chevron down
                 font-family:FontAwesome;
                 left:100%;
                 color:$blue;
                 top:0;
+                margin-left:.5em;
                 height:1em;
                 width:1em;
             }
-        }
+
+            &.active {
+                background-color:$lt-gray;  
+                border-left:1px solid $blue;
+                border-right:1px solid $blue;
+
+                //Pseudo element line that gets added to the bottom, makes the nav look conneted
+                &:before {
+                    content:"";
+                    width:100%;
+                    height:1px;
+                    position:absolute;
+                    top:100%;
+                    left:0;
+                    background-color:$lt-gray;
+                }
+
+                &+ul.sub-nav {
+                    display:block;
+                }
                 
-        a:hover,
-        a.active {
-            border-left:1px solid $md-gray;
-            border-right:1px solid $md-gray;
-            
-            
-            &:after {
-                content:"\f077"; //chevron up
+                &:after {
+                    content:"\f077"; //chevron up
+                }
             }
         }
+        
+        
     }
                 
     ul.sub-nav {
         display:none;
-        border:1px solid $md-gray;
+        border:1px solid $blue;
+        box-shadow:1px 1px 3px rgba(0,0,0,0.2);
         background-color:#FFF;
         width:300px;
         position:absolute;
         top:100%;
-        left:-1px;
 
         ul.sub-nav {//nested subnavs are displayed, but opacity is 0.  they animate slightly on appearance
             display:block;
             z-index:0;
             left:100%;
             top:-1px;
-            border-top:1px solid $md-gray;
             opacity:0;
             transform:translateX(-100%);
             transition:200ms all ease;
         }
 
-        a {
-            display:block;
-            padding:.5em 1.5em .5em .5em;
+        li {
             position:relative;
-            z-index:2;
-            background-color:#FFF;
-            border-bottom:1px solid $md-gray;
-            
-            &:last-child {
-                border-bottom:none;
-            }
+            border-bottom:1px solid $lt-gray;
 
-            &:hover,
-            &:focus {
-                text-decoration:none;
-                background-color:$lt-gray;
-            }
-            
-            &.active {
-                background-color:darken($lt-gray, 3%); 
-            }
-
-            &.active,
             &:hover {
-                &+ul.sub-nav {
+                &>ul.sub-nav {
                     display:block;  
                     opacity:1;
                     transform:translateX(0);
                 }
             }
+
+            &:last-child {
+                border-bottom:none;
+            }
+        }
+            
+        a {
+            color: $blue;
+            display:block;
+            padding:.5em 1.5em .5em .5em;
+            position:relative;
+            z-index:2;
+            background-color:#FFF;
+
+            &:hover,
+            &:focus,
+            &.active:hover,
+            &.active:focus{
+                text-decoration:none;
+                background-color:$lt-gray;
+            }
+            
+            &.active {
+                background-color:lighten($lt-gray, 5%); 
+            }
+                        
+            
+            
+            &.active+ul.sub-nav {
+                display:block;  
+                opacity:1;
+                transform:translateY(0);
+            }
             
             &.has-children {
+                overflow:hidden;
                 &:after {
                     content:"\f054"; //chevron right
                     padding-top:0.5em;
@@ -148,14 +172,19 @@ body {
                     height:100%;
                     top:0;
                     right:0;
-                    border-left:1px solid $md-gray;
+                    border-left:1px solid darken($lt-gray, 15%);
+                    transform:translateX(0);
+                    transition: all 150ms ease;
                 }
                 
                 &:hover:after,
                 &.active:after {
-                    content:"\f053"; //chevron right
+                    content:"";//"\f053"; //chevron right
+                    background-color:$lt-gray;
+                    transform:translateX(50%);
                 }
             }
         }
     }           
 }   
+
