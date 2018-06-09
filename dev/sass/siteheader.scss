@@ -8,7 +8,8 @@ body {
 
 .site-header__wrap {
     width:100%;
-    background:lighten($lt-gray, 10%);
+    background:lighten($lt-gray, 5%);
+    border-bottom:1px solid $md-gray;
 }
 
 .site-header__logo {
